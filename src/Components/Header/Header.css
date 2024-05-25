@@ -1,0 +1,31 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.logo{
+    padding: 0;
+    width: 16rem; /*16px = 1rem*/
+    height: 16rem;
+    padding-left:0rem; 
+    /* without background removing 16rem width and 14rem */
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+
+.left{
+    padding-top: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    /*padding-top: 1.2rem;*/
+    flex: 3;
+}
+
+.right{
+
+    flex: 1;
+   
+  
+}

@@ -1,0 +1,46 @@
+
+
+.App{
+
+    overflow: visible;
+}
+
+.stroke-text{
+    color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+}
+
+.button{
+    background-color: rgb(234, 54, 54);
+    color: white;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 18px;
+    border: 3.5px solid transparent;
+    transition: 300ms all;
+}
+
+.button:hover{
+    cursor: pointer;
+}
+
+
+/* .blur{
+    background: red;
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(220px); 
+        z-index: -9;
+        top: 16rem;
+        left: 0 rem;
+} */
+
+
+
+
+
+
+
+

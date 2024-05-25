@@ -1,0 +1,24 @@
+
+.review-list {
+    padding: 1em;
+    border-top: 1px solid #ddd;
+  }
+  
+  .review {
+    border-bottom: 1px solid #ddd;
+    padding: 1em 0;
+  }
+  
+  .review:last-child {
+    border-bottom: none;
+  }
+  
+  .review h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .review p {
+    margin: 0.5em 0 0 0;
+  }
+  

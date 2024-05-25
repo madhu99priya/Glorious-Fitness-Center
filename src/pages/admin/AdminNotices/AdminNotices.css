@@ -1,0 +1,42 @@
+
+.notices {
+    padding: 1em;
+  }
+  
+  .notice-form {
+    margin-bottom: 1em;
+  }
+  
+  .notice-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  
+  .notice-form button {
+    padding: 0.5em 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .notice-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .notice-list {
+    border-top: 1px solid #ddd;
+    padding-top: 1em;
+  }
+  
+  .notice {
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em 0;
+  }
+  
+  .notice:last-child {
+    border-bottom: none;
+  }
+  

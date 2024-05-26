@@ -66,4 +66,27 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Router for deleting a tempmember ( unapproval)
+
+router.delete('/:id', async (req,res) => {
+    try {
+
+        const {id} = req.params;
+
+        const result = await TempMember.findByIdAndDelete(id)
+
+        if(!result){
+            return res.status(404).send({message : 'Member can not find'})
+        }
+
+        return res.status(200).send({message : 'Member information deleted successfully'})
+        
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({message : error.message})
+        
+    }
+
+})
+
 export default router;

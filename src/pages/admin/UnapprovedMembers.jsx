@@ -41,10 +41,15 @@ const UnapprovedMembers = () => {
       });
   };
 
+  const handleDeleteClick = (member) => {
+    setSelectedMember(member);
+    setShowPopup(true);
+  };
+
   const handleConfirmDelete = () => {
     if (selectedMember) {
       axios
-        .delete(`http://localhost:9000/members/${selectedMember._id}`)
+        .delete(`http://localhost:9000/unapprove/${selectedMember._id}`)
         .then(() => {
           setMembers(members.filter(member => member._id !== selectedMember._id));
           setShowPopup(false);

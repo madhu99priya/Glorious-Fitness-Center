@@ -39,6 +39,7 @@ app.use('/members', memberRoute);
 app.use('/register',tempmemberRoute);
 app.use('/unapproved',tempmemberRoute);
 app.use('/approve',tempmemberRoute);
+app.use('/unapprove', tempmemberRoute);
 
 
 mongoose.connect(mongoDBURL)

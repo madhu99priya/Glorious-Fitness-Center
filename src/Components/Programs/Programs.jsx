@@ -3,6 +3,7 @@ import React from 'react'
 import './Programs.css'
 import {programsData} from '../../data/programsData.jsx'
 import Rightarrow from '../../assets/rightArrow.png'
+import { Link } from 'react-router-dom'
 
 const Programs = () => {
   return (
@@ -21,7 +22,10 @@ const Programs = () => {
               <span>{program.image}</span>
               <span>{program.heading}</span>
               <span>{program.details}</span>
-              <div className="join-now"><span>Join Now</span> <img src={Rightarrow} alt="#" /></div>
+              <div className="join-now">
+                <span>Join Now</span> 
+                <Link to = '/registrationform'><img className = "image" src={Rightarrow } alt="#" /></Link>
+              </div>
             </div>
 
           )

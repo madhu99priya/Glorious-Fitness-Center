@@ -13,9 +13,9 @@
 }
 
 .button{
-    background-color: rgb(234, 54, 54);
-    color: white;
-    padding: 0.5rem;
+    background-color: white;
+    color: black;
+    padding: 0.3rem;
     font-weight: bold;
     font-size: 18px;
     border: 3.5px solid transparent;

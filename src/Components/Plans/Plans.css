@@ -18,7 +18,7 @@
 .plan{
     display: flex;
     flex-direction: column;
-    background-color: gray ;
+    background-color: rgb(102, 100, 100) ;
     gap: 2rem;
     padding: 1.5rem;
     width: 18rem;

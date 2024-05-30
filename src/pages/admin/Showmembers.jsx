@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../../Components/Spinner.jsx';
@@ -16,6 +17,7 @@ const Showmembers = () => {
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -58,15 +60,21 @@ const Showmembers = () => {
     setSelectedMember(null);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredMembers = members.filter((member) => 
+    member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    member.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className='bg-cover bg-center h-screen' style={{ backgroundImage: `url(${Background})` }}>
       <BackbuttonContainer>
         <Backbutton destination='/admindashboard' />
       </BackbuttonContainer>
       <div className='flex justify-between items-center p-4'>
-        {/* <Link to='/admindashboard/members/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
-        </Link> */}
       </div>
 
       {loading ? (
@@ -77,9 +85,19 @@ const Showmembers = () => {
             <section className="table_header">
               <div className='flex justify-between items-center p-0'>
                 <h1>Members List</h1>
-                <Link to='/admindashboard/members/create'>
-                  <MdOutlineAddBox className='text-red-800 text-4xl' />
-                </Link>
+                <div className="flex items-center gap-2">
+                  <SearchBar>
+                    <input 
+                      type="text" 
+                      placeholder="Search members..." 
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                    />
+                  </SearchBar>
+                  <Link to='/admindashboard/members/create'>
+                    <MdOutlineAddBox className='text-red-800 text-4xl' />
+                  </Link>
+                </div>
               </div>
             </section>
             <section className="table_body">
@@ -94,7 +112,7 @@ const Showmembers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {members.map((member, index) => (
+                  {filteredMembers.map((member, index) => (
                     <tr key={member._id} className='h-8'>
                       <td>{index + 1}</td>
                       <td>{member.name}</td>
@@ -148,7 +166,7 @@ const Section = styled.section`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 1rem;
     overflow: hidden;
-    margin:4rem auto;
+    margin: 4rem auto;
     padding: 1rem;
   }
 
@@ -212,4 +230,21 @@ const BackbuttonContainer = styled.div`
   position: absolute;
   top: 1rem;
   left: 1rem;
+`;
+
+const SearchBar = styled.div`
+  input {
+    padding: 0.4rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    outline: none;
+    width: 200px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.6); /* Transparent background */
+    margin-left: 1rem;
+  }
+
+  input::placeholder {
+    color: gray;
+  }
 `;

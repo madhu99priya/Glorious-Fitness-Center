@@ -3,6 +3,7 @@ import { PORT, mongoDBURL } from './config.js'
 import mongoose  from 'mongoose'
 import memberRoute from './routes/memberRoute.js'
 import tempmemberRoute from './routes/tempmemberRoute.js'
+import PaymentRoute from './routes/PayementRoute.js'
 import cors from 'cors'
 
 
@@ -40,6 +41,7 @@ app.use('/register',tempmemberRoute);
 app.use('/unapproved',tempmemberRoute);
 app.use('/approve',tempmemberRoute);
 app.use('/unapprove', tempmemberRoute);
+app.use('/create-payment-intent',PaymentRoute)
 
 
 mongoose.connect(mongoDBURL)

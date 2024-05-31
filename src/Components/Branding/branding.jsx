@@ -6,9 +6,12 @@ import '../../App.css'
 import Hero from '../../assets/FirstImage.png'
 import Hero_Back from '../../assets/hero_image_back.png'
 import { Link } from 'react-router-dom';
+import {motion} from 'framer-motion'
 
 
 const Branding = () => {
+
+  const transition = { type : 'spring' , duration : 3}
   return (
     <div className='Brand'>
       <div className='backdrop-blur'></div>
@@ -16,7 +19,15 @@ const Branding = () => {
         <Header />
         
         <div className="the-add">
-            <div></div>
+            <motion.div
+
+            initial = {{left : '238px'}}
+            whileInView = {{left : '8px'}}
+            transition = {{...transition ,type : 'tween'} }
+            
+            
+            >
+            </motion.div>
             <span>The best fitness center in kandy</span>
         </div>
 
@@ -64,7 +75,7 @@ const Branding = () => {
 
       <div>
         <img src={Hero} alt="" className='hero-image' />
-        <img src={ Hero_Back} className='hero_back_image' />
+        <motion.img src={ Hero_Back} className='hero_back_image'  initial ={{right : '11rem'}} whileInView={{right:'19rem'}} transition={transition}/>
       </div>
 
     </div>

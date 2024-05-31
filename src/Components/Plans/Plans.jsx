@@ -34,7 +34,7 @@ const Plans = () => {
                 {/* <div>
                     <span>See more benifits...</span>
                 </div> */}
-                <Link to = '/paymentForm'>Join Now</Link>
+                <Link to = '/paymentForm' className='button'>Join Now</Link>
             </div>
            ))}
 

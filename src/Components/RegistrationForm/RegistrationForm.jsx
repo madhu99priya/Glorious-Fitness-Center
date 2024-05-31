@@ -124,7 +124,7 @@ const Section = styled.section`
     align-items: center;
     width: 40vw;
     max-height: 85vh;
-    background-color: rgba(255, 255, 255, 0.5); /* More transparent */
+    background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 1rem;
@@ -136,7 +136,7 @@ const Section = styled.section`
   h1 {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1rem; /* Reduced gap */
+    margin-bottom: 1rem; 
     width: 100%;
     text-align: center;
   }
@@ -145,7 +145,7 @@ const Section = styled.section`
     width: 100%;
     border: none;
     border-top: 1px solid white;
-    margin-bottom: 1rem; /* Reduced gap */
+    margin-bottom: 1rem; 
   }
 
   form {
@@ -166,14 +166,14 @@ const Section = styled.section`
   input,select {
     width: calc(100%);
     padding: 0.5rem;
-    border: 1px solid white; /* Set border color to white */
+    border: 1px solid white; 
     border-radius: 0.25rem;
     background: rgba(255, 255, 255, 0.7);
   }
 
   button {
     display: block;
-    width: calc(100% ); /* Match input field width */
+    width: calc(100% );
     padding: 0.75rem;
     margin-top: 1rem;
     border: none;

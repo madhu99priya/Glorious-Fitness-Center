@@ -70,11 +70,10 @@
 // export default PaymentForm;
 
 
-// PaymentForm.js
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import './PaymentForm.css'; // Create this CSS file for custom styling
+import './PaymentForm.css'; 
 
 const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft'); // Use your own publishable key
 

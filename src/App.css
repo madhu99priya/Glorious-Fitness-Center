@@ -20,6 +20,7 @@
     font-size: 18px;
     border: 3.5px solid transparent;
     transition: 300ms all;
+    text-align: center;
 }
 
 .button:hover{

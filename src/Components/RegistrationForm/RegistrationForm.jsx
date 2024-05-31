@@ -4,6 +4,7 @@ import Spinner from '../Spinner.jsx'
 import styled from 'styled-components';
 import Backbutton from '../Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -12,6 +13,7 @@ const RegistrationForm = () => {
   const [category, setCategory] = useState('');
   const [loading,setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar()
 
   const handleRegister = () => {
     const data = { name, email, age, category };
@@ -22,14 +24,16 @@ const RegistrationForm = () => {
       .then(response => {
         setLoading(false);
         console.log(response.data);
+        enqueueSnackbar('Registration submitted for approval', {variant : 'success'})
         navigate('/');
-        alert('Registration submitted for approval');
+        //alert('Registration submitted for approval');
         
       })
       .catch(error => {
         setLoading(false);
         console.log(error);
-        alert('An error occurred. Check the console for details.');
+        //alert('An error occurred. Check the console for details.');
+        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error'})
       });
   };
 

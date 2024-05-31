@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSnackbar } from 'notistack';
 
 
 const AdminLog = ({ toggleAdminLog }) => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar()
   const [admin, setAdmin] = useState({
     userName: '',
     password: ''
@@ -23,10 +25,10 @@ const AdminLog = ({ toggleAdminLog }) => {
     event.preventDefault();
     if (admin.userName === 'admin' && admin.password === 'admin') {
       toggleAdminLog();
+      enqueueSnackbar('Successfully logged in as admin', {variant : 'success'})
       navigate('/admindashboard');
-      alert('Successfully logged in as admin');
     } else {
-      alert('Incorrect user name or password');
+      enqueueSnackbar('Incorrect user name or password', {variant: 'error'})
     }
   };
 

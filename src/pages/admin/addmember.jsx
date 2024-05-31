@@ -5,6 +5,7 @@ import Backbutton from '../../Components/Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
 import Background from '../../assets/background-3.jpg';
 import styled from 'styled-components';
+import { useSnackbar } from 'notistack';
 
 const Addmember = () => {
   const [name, setName] = useState('');
@@ -13,6 +14,7 @@ const Addmember = () => {
   const [category, setCategory] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar()
 
   const handleSaveMember = () => {
     const data = {
@@ -27,11 +29,13 @@ const Addmember = () => {
       .post('http://localhost:9000/members', data)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar('A new member is added successfully', {variant : 'success'})
         navigate('/admindashboard/members');
       })
       .catch((err) => {
         setLoading(false);
-        alert('An error happened. Check the console');
+        //alert('An error happened. Check the console');
+        enqueueSnackbar('An error occured. Check the console',{variant : 'error'})
         console.log(err);
       });
   };

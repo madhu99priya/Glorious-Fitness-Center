@@ -1,62 +1,82 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import React, { useState, useEffect } from 'react';
 import AdminLog from '../AdminLogging/AdminLog.jsx';
 import './Navbar.css';
 import { MdAdminPanelSettings } from "react-icons/md";
+import { Link as ScrollLink } from 'react-scroll';
 
 const Navbar = () => {
-  // const location = useLocation();
   const [showAdminLog, setShowAdminLog] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
+  const [activeSection, setActiveSection] = useState('home');
 
   const toggleAdminLog = () => {
-    setShowAdminLog(!showAdminLog); 
+    setShowAdminLog(!showAdminLog);
   };
 
-  const handleLinkClick = (path) => {
-    setActiveLink(path);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section');
+      let currentSection = 'home';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100; 
+        if (window.scrollY >= sectionTop) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <nav >
-        <Link
-          to='/'
-          className={activeLink === '/' ? 'active' : ''}
-          onClick={() => handleLinkClick('/')}
-        >
-          Home
-        </Link>
-        <HashLink
-          smooth
-          to='/#Programs'
-          className={activeLink === '/#Programs' ? 'active' : ''}
-          onClick={() => handleLinkClick('/#Programs')}
-        >
-          Services & Payments
-        </HashLink>
-        <Link
-          to='/gallery'
-          className={activeLink === '/gallery' ? 'active' : ''}
-          onClick={() => handleLinkClick('/gallery')}
-        >
-          Gallery
-        </Link>
-        <Link
-          to='/about'
-          className={activeLink === '/about' ? 'active' : ''}
-          onClick={() => handleLinkClick('/about')}
-        >
-          About Us
-        </Link>
-        <MdAdminPanelSettings
-          onClick={toggleAdminLog}
-          size={33}
-          className='navbar-icon' 
-        />
-        {showAdminLog && <AdminLog toggleAdminLog={toggleAdminLog} />}
+    <nav className='navbar'>
+      <ScrollLink
+        to='home'
+        smooth={true}
+        duration={500}
+        className={activeSection === 'home' ? 'active' : ''}
+      >
+        Home
+      </ScrollLink>
+      <ScrollLink
+        to='programs'
+        smooth={true}
+        duration={500}
+        className={activeSection === 'programs' ? 'active' : ''}
+      >
+        Services & Payments
+      </ScrollLink>
+      <ScrollLink
+        to='gallery'
+        smooth={true}
+        duration={500}
+        className={activeSection === 'gallery' ? 'active' : ''}
+      >
+        Gallery
+      </ScrollLink>
+      <ScrollLink
+        to='about'
+        smooth={true}
+        duration={500}
+        className={activeSection === 'about' ? 'active' : ''}
+      >
+        About Us
+      </ScrollLink>
+      <MdAdminPanelSettings 
+        onClick={toggleAdminLog} 
+        size={33} 
+        className='navbar-icon'
+      />
+      {showAdminLog && <AdminLog toggleAdminLog={toggleAdminLog} />}
     </nav>
   );
 };
 
 export default Navbar;
+

@@ -7,9 +7,21 @@ import Plans from '../Components/Plans/Plans'
 const Home = () => {
   return (
     <div>
-      < Branding />
-      < Programs />
-      < Plans />
+
+      <section id='home'>
+        < Branding />
+      </section>
+      
+      <section id='programs'>
+        < Programs />
+      </section>
+
+{/* followings should be changed- not proper way */}
+      <section id='gallery'> 
+        < Plans />
+      </section>
+      
+      
     </div>
   )
 }

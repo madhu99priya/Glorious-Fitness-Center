@@ -25,7 +25,7 @@ const AdminLog = ({ toggleAdminLog }) => {
     event.preventDefault();
     if (admin.userName === 'admin' && admin.password === 'admin') {
       toggleAdminLog();
-      enqueueSnackbar('Successfully logged in as admin', {variant : 'success'})
+      enqueueSnackbar('Successfully logged in as admin', {variant : 'success', autoHideDuration : 1000} )
       navigate('/admindashboard');
     } else {
       enqueueSnackbar('Incorrect user name or password', {variant: 'error'})

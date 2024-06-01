@@ -1,15 +1,63 @@
 
 
 nav {
-        display: flex;
-        color: white;
-        gap: 2rem;
-        padding: 2rem;
-    
-}
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    position: fixed;
+    left: 22rem;
+    top: 1rem;
+    z-index: 1000;
 
-nav a{
+  }
+  
+  nav a {
     color: white;
     font-size: 1.2rem;
+    font-weight: 500;
     text-decoration: none;
-}
+    position: relative;
+    padding: 0.5rem 1rem;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: #ff3333; 
+  }
+  
+  nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(45deg, #4f1919, #ff3333);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  nav a:hover::before {
+    width: 100%;
+  }
+  
+  nav a.active::before {
+    width: 100%;
+  }
+  
+  nav a.active {
+    color: #ff3333; 
+  }
+
+  nav .MdAdminPanelSettings {
+    color: white;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  nav .MdAdminPanelSettings:hover {
+    color: #ff3333;
+  }
+  

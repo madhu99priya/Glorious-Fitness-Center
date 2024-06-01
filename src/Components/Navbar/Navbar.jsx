@@ -1,28 +1,62 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
-import { HashLink } from 'react-router-hash-link'
-import AdminLog from '../AdminLogging/AdminLog.jsx'
-import './Navbar.css'
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
+import AdminLog from '../AdminLogging/AdminLog.jsx';
+import './Navbar.css';
 import { MdAdminPanelSettings } from "react-icons/md";
 
 const Navbar = () => {
-
+  // const location = useLocation();
   const [showAdminLog, setShowAdminLog] = useState(false);
+  const [activeLink, setActiveLink] = useState('/');
+
   const toggleAdminLog = () => {
     setShowAdminLog(!showAdminLog); 
   };
 
-  return (
+  const handleLinkClick = (path) => {
+    setActiveLink(path);
+  };
 
-    <nav className='Navbar'>
-        <Link to='/'>Home</Link>
-        <HashLink smooth to='/#Programs'>Services & Payments</HashLink>
-        <Link>Gallery</Link>
-        <Link>About Us</Link>
-        <MdAdminPanelSettings onClick={toggleAdminLog} size={33} style={{ cursor: 'pointer' }} />
+  return (
+    <nav >
+        <Link
+          to='/'
+          className={activeLink === '/' ? 'active' : ''}
+          onClick={() => handleLinkClick('/')}
+        >
+          Home
+        </Link>
+        <HashLink
+          smooth
+          to='/#Programs'
+          className={activeLink === '/#Programs' ? 'active' : ''}
+          onClick={() => handleLinkClick('/#Programs')}
+        >
+          Services & Payments
+        </HashLink>
+        <Link
+          to='/gallery'
+          className={activeLink === '/gallery' ? 'active' : ''}
+          onClick={() => handleLinkClick('/gallery')}
+        >
+          Gallery
+        </Link>
+        <Link
+          to='/about'
+          className={activeLink === '/about' ? 'active' : ''}
+          onClick={() => handleLinkClick('/about')}
+        >
+          About Us
+        </Link>
+        <MdAdminPanelSettings
+          onClick={toggleAdminLog}
+          size={33}
+          className='admin-icon'
+        />
         {showAdminLog && <AdminLog toggleAdminLog={toggleAdminLog} />}
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

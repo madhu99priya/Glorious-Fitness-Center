@@ -1,65 +1,163 @@
+/* nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: -0.5rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
 
 
+.nav-left img {
+  width: 16rem;
+  height: 16rem;
+  margin-left: 0;
+}
+
+.nav-right {
+  display: flex;
+  gap: 2rem;
+  margin-right: 26rem;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin-top: -10rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff3333;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #4f1919, #ff3333);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover::before,
+nav a.active::before {
+  width: 100%;
+}
+
+nav a.active {
+  color: #ff3333;
+}
+
+.navbar-icon {
+  color: white;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  margin-top: -10rem;
+}
+
+.navbar-icon:hover {
+  color: #ff3333;
+} */
+
+/* Base styles for the navigation bar */
 nav {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 1rem 2rem;
-    position: fixed;
-    left: 22rem;
-    top: 1rem;
-    z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease, padding 0.3s ease;
+  background: transparent;
+}
 
-  }
-  
-  nav a {
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-decoration: none;
-    position: relative;
-    padding: 0.5rem 1rem;
-    z-index: 1;
-    transition: color 0.3s ease;
-  }
-  
-  nav a:hover {
-    color: #ff3333; 
-  }
-  
-  nav a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(45deg, #4f1919, #ff3333);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-  }
-  
-  nav a:hover::before {
-    width: 100%;
-  }
-  
-  nav a.active::before {
-    width: 100%;
-  }
-  
-  nav a.active {
-    color: #ff3333; 
-  }
+/* Styles when the navigation bar is scrolled */
+nav.scrolled {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 0.5rem 2rem;
+}
 
-  .navbar-icon {
-    color: white;
-    transition: color 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .navbar-icon:hover {
-    color: #ff3333; 
-  }
+/* Logo styles */
+.nav-left img {
+  width: 16rem;
+  height:16rem;
+  transition: opacity 0.3s ease;
+  margin-top: 2rem;
+}
 
- 
-  
+nav.scrolled .nav-left img {
+  opacity: 0;
+}
+
+/* Styles for the navigation links */
+.nav-right {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  transition: margin-right 0.3s ease;
+  margin-right: 26rem;
+}
+
+nav.scrolled .nav-right {
+  margin-right: 2rem;
+}
+
+nav a {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  margin-top: -10rem;
+}
+
+nav a:hover {
+  color: #ff3333;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #4f1919, #ff3333);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover::before,
+nav a.active::before {
+  width: 100%;
+}
+
+nav a.active {
+  color: #ff3333;
+}
+
+/* Styles for the admin panel icon */
+.navbar-icon {
+  color: white;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  margin-top: -10rem;
+}
+
+.navbar-icon:hover {
+  color: #ff3333;
+}
+

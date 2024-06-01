@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import AdminLog from '../AdminLogging/AdminLog.jsx';
 import './Navbar.css';
@@ -52,7 +52,7 @@ const Navbar = () => {
         <MdAdminPanelSettings
           onClick={toggleAdminLog}
           size={33}
-          className='admin-icon'
+          className='navbar-icon' 
         />
         {showAdminLog && <AdminLog toggleAdminLog={toggleAdminLog} />}
     </nav>

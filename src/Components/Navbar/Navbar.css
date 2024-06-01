@@ -51,13 +51,13 @@ nav {
     color: #ff3333; 
   }
 
-  nav .MdAdminPanelSettings {
+  .navbar-icon {
     color: white;
-    cursor: pointer;
     transition: color 0.3s ease;
+    cursor: pointer;
   }
   
-  nav .MdAdminPanelSettings:hover {
-    color: #ff3333;
+  .navbar-icon:hover {
+    color: #ff3333; 
   }
   

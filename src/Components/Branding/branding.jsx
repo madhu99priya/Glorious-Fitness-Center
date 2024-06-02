@@ -7,7 +7,7 @@ import Hero from '../../assets/FirstImage.png'
 import Hero_Back from '../../assets/hero_image_back.png'
 import { Link } from 'react-router-dom';
 import {motion} from 'framer-motion'
-import Navbar from '../Navbar/Navbar.jsx'
+
 
 
 const Branding = () => {
@@ -17,7 +17,7 @@ const Branding = () => {
     <div className='Brand'>
       <div className='backdrop-blur'></div>
       <div className="left">
-        <Navbar />
+        <Header />
         
         <div className="the-add">
             <motion.div

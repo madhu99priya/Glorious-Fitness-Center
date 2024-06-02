@@ -2,6 +2,7 @@ import React from 'react'
 import Branding from  '../Components/Branding/branding'
 import Programs from '../Components/Programs/Programs'
 import Plans from '../Components/Plans/Plans'
+import Footer from '../Components/Footer/Footer'
 
 
 const Home = () => {
@@ -19,6 +20,12 @@ const Home = () => {
 {/* followings should be changed- not proper way */}
       <section id='gallery'> 
         < Plans />
+      </section>
+
+      <section id='footer'>
+
+        <Footer />
+
       </section>
       
       

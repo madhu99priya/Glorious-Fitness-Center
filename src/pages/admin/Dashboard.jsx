@@ -37,7 +37,7 @@ const Div = styled.div`
     display : flex;
     justify-content: center;
     right: 18%;
-    top:90%;
+    margin-top: 1rem;
     width: 50rem;
   }
 

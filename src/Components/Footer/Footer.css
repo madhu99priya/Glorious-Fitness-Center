@@ -1,0 +1,43 @@
+.footer-container{
+    position: relative;
+
+}
+
+.footer-container>hr{
+    border: 1px solid white;
+    margin-top: 4rem;
+}
+
+.footer{
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction:column ;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+    margin-top: -5rem;
+}
+
+.social-links{
+    display: flex;
+    gap: 4rem;
+}
+
+.social-links>img{
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+.logo-f{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -6rem;
+}
+
+.logo-f>img{
+    width: 12rem;
+    margin-bottom: 2rem;
+}

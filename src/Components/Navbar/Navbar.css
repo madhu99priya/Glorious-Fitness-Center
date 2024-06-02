@@ -1,21 +1,26 @@
+
 nav {
   display: flex;
   align-items: center;
+  justify-content: center; 
   gap: 2rem;
   padding: 1rem 2rem;
-  position: fixed;
-  left: 24rem;
-  top: 1rem;
-  z-index: 1000;
-
+  transition: all 0.3s ease;
 }
 
-nav.past-home {
+nav.non-fixed {
+  position: absolute;
+  width: 100%; 
+  top: 1rem;
+}
 
-
-  background:black;
-  padding: 0.2rem;
- 
+nav.fixed {
+  position: fixed;
+  width: 100%; 
+  top: 0;
+  padding: 0.5rem 1rem;
+  background: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 nav a {
@@ -66,5 +71,3 @@ nav a.active {
 .navbar-icon:hover {
   color: #ff3333; 
 }
-
-

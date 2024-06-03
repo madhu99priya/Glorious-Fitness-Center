@@ -22,7 +22,7 @@ const Home = () => {
         < Plans />
       </section>
 
-      <section id='footer'>
+      <section id='about'>
 
         <Footer />
 

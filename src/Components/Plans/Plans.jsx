@@ -30,10 +30,6 @@ const Plans = () => {
                         </div>
                     ))}
                 </div>
-
-                {/* <div>
-                    <span>See more benifits...</span>
-                </div> */}
                 <Link to = '/paymentForm' className='button'>Join Now</Link>
             </div>
            ))}

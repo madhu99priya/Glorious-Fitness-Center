@@ -1,81 +1,9 @@
-// import React, { useState, useEffect } from 'react';
-// import { loadStripe } from '@stripe/stripe-js';
-// import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-
-// const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft'); 
-
-// const CheckoutForm = () => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const [clientSecret, setClientSecret] = useState('');
-
-//   useEffect(() => {
-//     const createPaymentIntent = async () => {
-//       const response = await fetch('http://localhost:9000/create-payment-intent', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ amount: 1000 }), // Amount in cents (e.g., 1000 cents = 10 LKR)
-//       });
-
-//       const data = await response.json();
-//       setClientSecret(data.clientSecret);
-//     };
-
-//     createPaymentIntent();
-//   }, []);
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     if (!stripe || !elements) {
-//       return;
-//     }
-
-//     const cardElement = elements.getElement(CardElement);
-
-//     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: cardElement,
-//         billing_details: {
-//           name: 'Customer Name',
-//         },
-//       },
-//     });
-
-//     if (error) {
-//       console.log('[error]', error);
-//     } else {
-//       console.log('[PaymentIntent]', paymentIntent);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <CardElement />
-//       <button type="submit" disabled={!stripe || !clientSecret}>
-//         Pay
-//       </button>
-//     </form>
-//   );
-// };
-
-// const PaymentForm = () => (
-//   <Elements stripe={stripePromise}>
-//     <CheckoutForm />
-//   </Elements>
-// );
-
-// export default PaymentForm;
-
-
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import './PaymentForm.css'; 
+import './PaymentForm.css';
 
-const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft'); // Use your own publishable key
+const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft');
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -85,16 +13,20 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     const createPaymentIntent = async () => {
-      const response = await fetch('http://localhost:9000/create-payment-intent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: 1000 }), // Amount in cents (e.g., 1000 cents = 10 LKR)
-      });
+      try {
+        const response = await fetch('http://localhost:9000/create-payment-intent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ amount: 1000 }),
+        });
 
-      const data = await response.json();
-      setClientSecret(data.clientSecret);
+        const data = await response.json();
+        setClientSecret(data.clientSecret);
+      } catch (error) {
+        console.error('Error creating payment intent:', error);
+      }
     };
 
     createPaymentIntent();
@@ -109,21 +41,26 @@ const CheckoutForm = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-        billing_details: {
-          name: 'Customer Name',
+    try {
+      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: 'Customer Name',
+          },
         },
-      },
-    });
+      });
 
-    if (error) {
-      console.log('[error]', error);
+      if (error) {
+        console.log('[error]', error);
+        setPaymentStatus('Payment failed. Please try again.');
+      } else {
+        console.log('[PaymentIntent]', paymentIntent);
+        setPaymentStatus('Payment successful! Thank you for your payment.');
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
       setPaymentStatus('Payment failed. Please try again.');
-    } else {
-      console.log('[PaymentIntent]', paymentIntent);
-      setPaymentStatus('Payment successful! Thank you for your payment.');
     }
   };
 

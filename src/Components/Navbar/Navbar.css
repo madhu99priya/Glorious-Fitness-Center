@@ -6,6 +6,7 @@ nav {
   gap: 2rem;
   padding: 1rem 2rem;
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 nav.non-fixed {
@@ -30,7 +31,7 @@ nav a {
   text-decoration: none;
   position: relative;
   padding: 0.5rem 1rem;
-  z-index: 1;
+  z-index: 11;
   transition: color 0.3s ease;
 
 }

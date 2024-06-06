@@ -3,6 +3,7 @@ import Branding from  '../Components/Branding/branding'
 import Programs from '../Components/Programs/Programs'
 import Plans from '../Components/Plans/Plans'
 import Footer from '../Components/Footer/Footer'
+import ImageGallery from '../Components/Gallery/Gallery.jsx'
 
 
 const Home = () => {
@@ -23,6 +24,8 @@ const Home = () => {
       </section>
 
       <section id='about'>
+      
+        <ImageGallery />
 
         <Footer />
 

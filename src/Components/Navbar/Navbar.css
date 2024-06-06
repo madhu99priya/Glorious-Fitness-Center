@@ -33,6 +33,7 @@ nav a {
   padding: 0.5rem 1rem;
   z-index: 11;
   transition: color 0.3s ease;
+  cursor: pointer;
 
 }
 

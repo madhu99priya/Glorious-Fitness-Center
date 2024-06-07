@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { BiSearch } from "react-icons/bi";
-
-
 
 export default function DashboardNavbar() {
   return (

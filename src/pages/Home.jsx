@@ -16,16 +16,16 @@ const Home = () => {
       
       <section id='programs'>
         < Programs />
+        < Plans />
       </section>
 
 {/* followings should be changed- not proper way */}
       <section id='gallery'> 
-        < Plans />
+      <ImageGallery />
       </section>
 
       <section id='about'>
-      
-        <ImageGallery />
+    
 
         <Footer />
 

@@ -8,9 +8,9 @@ const memberSchema = new Schema(
         name: { type: String, required: true },
         email: { type: String, required: true, unique: true },
         age: { type: Number, min: 14 },
-        // new adding from here
         category: { type: String, required: true },
-        isApproved: { type: Boolean, default: false } 
+        isApproved: { type: Boolean, default: false },
+        payments: [{ type: Schema.Types.ObjectId, ref: 'Payment' }] // Adding payments reference 
     
     }
 );

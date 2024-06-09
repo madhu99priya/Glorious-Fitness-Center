@@ -24,7 +24,7 @@ const RegistrationForm = () => {
       .then(response => {
         setLoading(false);
         console.log(response.data);
-        enqueueSnackbar('Registration submitted for approval', {variant : 'success'})
+        enqueueSnackbar('Registration submitted for approval', {variant : 'success', autoHideDuration: 1000})
         navigate('/');
         //alert('Registration submitted for approval');
         
@@ -33,7 +33,7 @@ const RegistrationForm = () => {
         setLoading(false);
         console.log(error);
         //alert('An error occurred. Check the console for details.');
-        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error'})
+        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error', autoHideDuration: 1000})
       });
   };
 

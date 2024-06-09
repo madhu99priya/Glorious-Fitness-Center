@@ -1,45 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Elements, useStripe, useElements } from '@stripe/react-stripe-js';
-import './PaymentForm.css';
-import $ from 'jquery'; 
-import Logo from '../../assets/logo.png'
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import styled from 'styled-components';
+import axios from 'axios';
 
 const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft');
 
-const CheckoutForm = () => {
+const plans = {
+  '1 month': 2500,
+  '6 months': 14000,
+  '1 year': 29000
+};
+
+const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [clientSecret, setClientSecret] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState('');
+  const [memberId, setMemberId] = useState('');
+  const [plan, setPlan] = useState('1 month');
+  const [amount, setAmount] = useState(plans['1 month']);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const createPaymentIntent = async () => {
-      try {
-        const response = await fetch('http://localhost:9000/create-payment-intent', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ amount: 1000 }),
-        });
-
-        const data = await response.json();
-        setClientSecret(data.clientSecret);
-      } catch (error) {
-        console.error('Error creating payment intent:', error);
-      }
-    };
-
-    createPaymentIntent();
-
-    // Applying the mask plugin in jquery
-    $(document).ready(function(){
-      $('[data-mask="0000 0000 0000 0000"]').mask('0000 0000 0000 0000');
-      $('[data-mask="00 / 00"]').mask('00 / 00');
-      $('[data-mask="000"]').mask('000');
-    });
-  }, []);
+    setAmount(plans[plan]);
+  }, [plan]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -48,87 +32,192 @@ const CheckoutForm = () => {
       return;
     }
 
-    const cardNumber = document.querySelector('[data-mask="0000 0000 0000 0000"]').value;
-    const expiryDate = document.querySelector('[data-mask="00 / 00"]').value.split('/');
-    const cvv = document.querySelector('[data-mask="000"]').value;
-    const cardHolder = document.querySelector('[placeholder="Coding Market"]').value;
+    const cardElement = elements.getElement(CardElement);
 
-    const card = {
-      number: cardNumber.replace(/\s+/g, ''),
-      exp_month: parseInt(expiryDate[0]),
-      exp_year: parseInt(expiryDate[1]),
-      cvc: cvv,
-    };
+    setLoading(true);
 
     try {
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card,
-          billing_details: {
-            name: cardHolder,
-          },
-        },
+      // Create a PaymentMethod with card details
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
       });
 
       if (error) {
-        console.log('[error]', error);
-        setPaymentStatus('Payment failed. Please try again.');
-      } else {
-        console.log('[PaymentIntent]', paymentIntent);
-        setPaymentStatus('Payment successful! Thank you for your payment.');
+        setError(error.message);
+        setLoading(false);
+        return;
       }
+
+      // Send paymentMethodId to the backend
+      const response = await axios.post('http://localhost:9000/payments', {
+        memberId,
+        plan,
+        paymentMethodId: paymentMethod.id,
+      });
+
+      console.log(response.data);
+      // Handle success or error accordingly
+
     } catch (error) {
-      console.error('Payment error:', error);
-      setPaymentStatus('Payment failed. Please try again.');
+      console.error(error);
+      setError(error.response ? error.response.data : error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="wrapper">
-      <div className="payment">
-        <div >
-          <img src={Logo} alt="" className="payment-logo"/>
-        </div>
-        <h2>Payment Gateway</h2>
-        <div className="form">
-          <form onSubmit={handleSubmit}>
-            <div className="card space icon-relative">
-              <label className="label">Card holder:</label>
-              <input type="text" className="input" placeholder="Card holder's Name" />
-              <i className="fas fa-user"></i>
-            </div>
-            <div className="card space icon-relative">
-              <label className="label">Card number:</label>
-              <input type="text" className="input" data-mask="0000 0000 0000 0000" placeholder="Card Number" />
-              <i className="far fa-credit-card"></i>
-            </div>
-            <div className="card-grp space">
-              <div className="card-item icon-relative">
-                <label className="label">Expiry date:</label>
-                <input type="text" name="expiry-data" className="input" data-mask="00 / 00" placeholder="00 / 00" />
-                <i className="far fa-calendar-alt"></i>
-              </div>
-              <div className="card-item icon-relative">
-                <label className="label">CVC:</label>
-                <input type="text" className="input" data-mask="000" placeholder="000" />
-                <i className="fas fa-lock"></i>
-              </div>
-            </div>
-            <div className="btn">
-              <button type="submit" disabled={!stripe || !clientSecret}>Pay</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      {paymentStatus && <p className="payment-status">{paymentStatus}</p>}
-    </div>
+    <FormContainer>
+      <FormTitle>Member Payment Form</FormTitle>
+      <form onSubmit={handleSubmit}>
+        <FormField>
+          <Label htmlFor="memberId">Member ID</Label>
+          <Input
+            type="text"
+            id="memberId"
+            value={memberId}
+            onChange={(e) => setMemberId(e.target.value)}
+          />
+        </FormField>
+        <FormField>
+          <Label htmlFor="plan">Plan</Label>
+          <Select
+            id="plan"
+            value={plan}
+            onChange={(e) => setPlan(e.target.value)}
+          >
+            <option value="1 month">1 month - Rs. 2500</option>
+            <option value="6 months">6 months - Rs. 14000</option>
+            <option value="1 year">1 year - Rs. 29000</option>
+          </Select>
+        </FormField>
+        <FormField>
+          <Label>Amount</Label>
+          <AmountDisplay>Rs. {amount}</AmountDisplay>
+        </FormField>
+        <FormField>
+          <Label>Card Details</Label>
+          <CardElementContainer>
+            <CardElement options={cardStyle} />
+          </CardElementContainer>
+        </FormField>
+        <SubmitButton type="submit" disabled={!stripe || loading}>
+          {loading ? 'Processing...' : 'Pay'}
+        </SubmitButton>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </form>
+    </FormContainer>
   );
 };
 
-const PaymentForm = () => (
+const PaymentFormPage = () => (
   <Elements stripe={stripePromise}>
-    <CheckoutForm />
+    <PaymentForm />
   </Elements>
 );
 
-export default PaymentForm;
+export default PaymentFormPage;
+
+const FormContainer = styled.div`
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: black;
+`;
+
+const FormTitle = styled.h2`
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+`;
+
+const FormField = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #666;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+`;
+
+const AmountDisplay = styled.div`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #e9ecef;
+`;
+
+const CardElementContainer = styled.div`
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #218838;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  margin-top: 1rem;
+`;
+
+const cardStyle = {
+  style: {
+    base: {
+      fontSize: '16px',
+      color: '#424770',
+      '::placeholder': {
+        color: '#aab7c4',
+      },
+    },
+    invalid: {
+      color: '#9e2146',
+    },
+  },
+};
+

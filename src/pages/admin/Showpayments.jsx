@@ -1,74 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Backbutton from '../../Components/Backbutton.jsx';
-import Background from '../../assets/background-2.jpg'
 import Spinner from '../../Components/Spinner.jsx';
-import DeleteMemberPopup from '../../Components/DeleteMemberPopup.jsx';
-import { FcDisapprove } from "react-icons/fc";
-import { FcApprove } from "react-icons/fc";
+import { Link } from 'react-router-dom';
+import { MdOutlineAddBox } from 'react-icons/md';
+import Background from '../../assets/background-2.jpg';
 import styled from 'styled-components';
-import { useSnackbar } from 'notistack';
+import Backbutton from '../../Components/Backbutton.jsx';
 
-const UnapprovedMembers = () => {
+const Showpayments = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedMember, setSelectedMember] = useState(null);
-  const { enqueueSnackbar } = useSnackbar()
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-
     setLoading(true);
 
-    axios.get('http://localhost:9000/unapproved')
-      .then(response => {
-        setMembers(response.data.data);
+    axios
+      .get('http://localhost:9000/members')
+      .then((res) => {
+        setMembers(res.data.data);
         setLoading(false);
       })
-      .catch(error => {
-        console.error(error);
+      .catch((err) => {
+        console.log(err);
         setLoading(false);
       });
   }, []);
 
-  const handleApprove = (id) => {
-    axios.put(`http://localhost:9000/approve/${id}`)
-      .then(() => {
-        setMembers(members.filter(member => member._id !== id));
-        //alert('Member approved');
-        enqueueSnackbar('Member approved', {variant: 'success', autoHideDuration : 1000})
-      })
-      .catch(error => {
-        console.error(error);
-        //alert('An error occurred. Check the console for details.');
-        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'success', autoHideDuration: 1000})
-      });
-  };
-
-  const handleDeleteClick = (member) => {
-    setSelectedMember(member);
-    setShowPopup(true);
-  };
-
-  const handleConfirmDelete = () => {
-    if (selectedMember) {
-      axios
-        .delete(`http://localhost:9000/unapprove/${selectedMember._id}`)
-        .then(() => {
-          setMembers(members.filter(member => member._id !== selectedMember._id));
-          setShowPopup(false);
-        })
-        .catch((err) => {
-          alert('An error occurred. Please check the console');
-          console.log(err);
-          setShowPopup(false);
-        });
-    }
-  };
-
-  const handleCancelDelete = () => {
-    setShowPopup(false);
-    setSelectedMember(null);
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -77,9 +37,6 @@ const UnapprovedMembers = () => {
         <Backbutton destination='/admindashboard' />
       </BackbuttonContainer>
       <div className='flex justify-between items-center p-4'>
-        {/* <Link to='/admindashboard/members/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
-        </Link> */}
       </div>
 
       {loading ? (
@@ -89,7 +46,20 @@ const UnapprovedMembers = () => {
           <div className="table-container">
             <section className="table_header">
               <div className='flex justify-between items-center p-0'>
-                <h1>Unapproved Members</h1>
+                <h1>Members List</h1>
+                <div className="flex items-center gap-2">
+                  <SearchBar>
+                    <input 
+                      type="text" 
+                      placeholder="Search members..." 
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                    />
+                  </SearchBar>
+                  <Link to='/admindashboard/addpayments'>
+                    <MdOutlineAddBox className='text-red-800 text-4xl' />
+                  </Link>
+                </div>
               </div>
             </section>
             <section className="table_body">
@@ -99,9 +69,8 @@ const UnapprovedMembers = () => {
                     <th>No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Age</th>
-                    <th>Category</th>
-                    <th>Operations</th>
+                    <th>Id</th>
+                    <th>Payment Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,21 +79,17 @@ const UnapprovedMembers = () => {
                       <td>{index + 1}</td>
                       <td>{member.name}</td>
                       <td>{member.email}</td>
-                      <td>{member.age}</td>
-                      <td>{member.category}</td>
+                      <td>{member._id}</td>
                       <td>
-                        <div className='flex justify-start gap-x-4'>
-                   
-                          <button onClick={() => handleApprove(member._id)} className='text-red-600'>
-                            <FcApprove className='text-2xl' />
-                          </button>
-
-                          <button onClick={() => handleDeleteClick(member)} className='text-red-600'>
-                            <FcDisapprove className='text-2xl' />
-                          </button>
-
-
-                        </div>
+                        {member.payments && member.payments.length > 0 ? (
+                          member.payments.map(payment => (
+                            <StatusIndicator expired={!payment.isActive} key={payment._id}>
+                              {payment.isActive ? 'Active' : 'Expired'}
+                            </StatusIndicator>
+                          ))
+                        ) : (
+                          'No Payments'
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -134,19 +99,11 @@ const UnapprovedMembers = () => {
           </div>
         </Section>
       )}
-
-      {showPopup && (
-        <DeleteMemberPopup 
-          onConfirm={handleConfirmDelete} 
-          onCancel={handleCancelDelete} 
-        />
-      )}
     </div>
   );
-};
+}
 
-export default UnapprovedMembers;
-
+export default Showpayments;
 
 const Section = styled.section`
   color: black;
@@ -162,7 +119,7 @@ const Section = styled.section`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 1rem;
     overflow: hidden;
-    margin:4rem auto;
+    margin: 4rem auto;
     padding: 1rem;
   }
 
@@ -226,4 +183,31 @@ const BackbuttonContainer = styled.div`
   position: absolute;
   top: 1rem;
   left: 1rem;
+`;
+
+const SearchBar = styled.div`
+  input {
+    padding: 0.4rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    outline: none;
+    width: 200px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.6); /* Transparent background */
+    margin-left: 1rem;
+  }
+
+  input::placeholder {
+    color: gray;
+  }
+`;
+
+const StatusIndicator = styled.div`
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: ${(props) => (props.expired ? '#e74c3c' : '#2ecc71')};
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 `;

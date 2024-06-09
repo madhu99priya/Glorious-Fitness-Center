@@ -9,6 +9,7 @@ import Editmember from './pages/admin/editmember.jsx';
 import UnapprovedMembers from './pages/admin/UnapprovedMembers.jsx'
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm.jsx';
 import PaymentForm from './Components/PaymentForm/PaymentForm.jsx';
+import Showpayments from './pages/admin/Showpayments.jsx'
 
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
        < Route path = 'admindashboard/members/edit/:id' element= { <Editmember />} />
        < Route path = 'admindashboard/newregistrations' element = { < UnapprovedMembers /> } />
        < Route path = 'registrationform' element = { < RegistrationForm/>} />
-       < Route path = 'paymentform' element = { <PaymentForm />} />
+       < Route path = 'admindashboard/payments' element = { <Showpayments />} />
+       < Route path = 'admindashboard/addpayments' element = { <PaymentForm />} />
+       < Route path = 'admindashboard/payment-confirmation' />
        {/* relative links */}
     
     </Routes>

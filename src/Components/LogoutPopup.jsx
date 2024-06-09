@@ -28,6 +28,7 @@ const PopupWrapper = styled.div`
   width: 300px;
   max-width: 80%;
   text-align: center;
+  z-index: 13;
 `;
 
 export default LogoutPopup;

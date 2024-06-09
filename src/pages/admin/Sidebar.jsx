@@ -87,10 +87,10 @@ const Sidebar = () => {
                 className={currentLink === 3 ? 'active' : 'none'}
                 onClick={() => setCurrentLink(3)}
               >
-                <a href="#">
+                <Link to= "/admindashboard/payments" >
                   <FaAddressCard />
                   <span> Payments</span>
-                </a>
+                </Link>
               </li>
               <li
                 className={currentLink === 4 ? 'active' : 'none'}

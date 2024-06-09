@@ -41,7 +41,7 @@ app.use('/register',tempmemberRoute);
 app.use('/unapproved',tempmemberRoute);
 app.use('/approve',tempmemberRoute);
 app.use('/unapprove', tempmemberRoute);
-app.use('/create-payment-intent',PaymentRoute)
+app.use('/payments',PaymentRoute)
 
 
 mongoose.connect(mongoDBURL)

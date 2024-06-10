@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft');
 
@@ -13,9 +14,10 @@ const plans = {
 };
 
 const PaymentForm = () => {
+  const { memberId: paramMemberId } = useParams();
   const stripe = useStripe();
   const elements = useElements();
-  const [memberId, setMemberId] = useState('');
+  const [memberId, setMemberId] = useState(paramMemberId || '');
   const [plan, setPlan] = useState('1 month');
   const [amount, setAmount] = useState(plans['1 month']);
   const [error, setError] = useState(null);
@@ -78,6 +80,7 @@ const PaymentForm = () => {
             id="memberId"
             value={memberId}
             onChange={(e) => setMemberId(e.target.value)}
+            required
           />
         </FormField>
         <FormField>

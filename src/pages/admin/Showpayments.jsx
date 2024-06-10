@@ -56,9 +56,9 @@ const ShowPayments = () => {
                       onChange={handleSearchChange}
                     />
                   </SearchBar>
-                  <Link to='/admindashboard/addpayments'>
+                  {/* <Link to='/admindashboard/addpayments'>
                     <MdOutlineAddBox className='text-red-800 text-4xl' />
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </section>
@@ -88,7 +88,7 @@ const ShowPayments = () => {
                         <td>
                           {member.payments && member.payments.length > 0 ? (
                             [...new Set(member.payments.map((payment) => payment.isActive ? 'Active' : 'Expired'))].map((status, index) => (
-                              <StatusIndicator expired={status === 'Expired'} key={index}>
+                              <StatusIndicator expired={status === 'Expired' ? true : undefined} key={index}>
                                 {status}
                               </StatusIndicator>
                             ))
@@ -97,7 +97,7 @@ const ShowPayments = () => {
                           )}
                         </td>
                         <td>
-                          <Link to={`/pay/${member._id}`}>Renew</Link>
+                          <Link to={`/admindashboard/addpayments/${member._id}`}>Renew</Link>
                         </td>
                       </tr>
                     ))}

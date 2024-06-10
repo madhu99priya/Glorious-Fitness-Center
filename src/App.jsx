@@ -27,7 +27,7 @@ function App() {
        < Route path = 'admindashboard/newregistrations' element = { < UnapprovedMembers /> } />
        < Route path = 'registrationform' element = { < RegistrationForm/>} />
        < Route path = 'admindashboard/payments' element = { <Showpayments />} />
-       < Route path = 'admindashboard/addpayments' element = { <PaymentForm />} />
+       < Route path = 'admindashboard/addpayments/:memberId' element = { <PaymentForm />} />
        < Route path = 'admindashboard/payment-confirmation' />
        {/* relative links */}
     

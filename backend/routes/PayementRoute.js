@@ -89,6 +89,10 @@ router.post('/', async (req, res) => {
 
     await payment.save();
 
+    // Link payment to member
+    member.payments.push(payment._id);
+    await member.save();
+
     res.status(201).send(payment);
   } catch (error) {
     res.status(500).send(error.message);
@@ -96,3 +100,4 @@ router.post('/', async (req, res) => {
 });
 
 export default router;
+

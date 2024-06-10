@@ -7,7 +7,7 @@ import Background from '../../assets/background-2.jpg';
 import styled from 'styled-components';
 import Backbutton from '../../Components/Backbutton.jsx';
 
-const Showpayments = () => {
+const ShowPayments = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,28 +71,36 @@ const Showpayments = () => {
                     <th>Email</th>
                     <th>Id</th>
                     <th>Payment Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {members.map((member, index) => (
-                    <tr key={member._id} className='h-8'>
-                      <td>{index + 1}</td>
-                      <td>{member.name}</td>
-                      <td>{member.email}</td>
-                      <td>{member._id}</td>
-                      <td>
-                        {member.payments && member.payments.length > 0 ? (
-                          member.payments.map(payment => (
-                            <StatusIndicator expired={!payment.isActive} key={payment._id}>
-                              {payment.isActive ? 'Active' : 'Expired'}
-                            </StatusIndicator>
-                          ))
-                        ) : (
-                          'No Payments'
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                  {members
+                    .filter((member) =>
+                      member.name.toLowerCase().includes(searchQuery.toLowerCase())
+                    )
+                    .map((member, index) => (
+                      <tr key={member._id} className='h-8'>
+                        <td>{index + 1}</td>
+                        <td>{member.name}</td>
+                        <td>{member.email}</td>
+                        <td>{member._id}</td>
+                        <td>
+                          {member.payments && member.payments.length > 0 ? (
+                            [...new Set(member.payments.map((payment) => payment.isActive ? 'Active' : 'Expired'))].map((status, index) => (
+                              <StatusIndicator expired={status === 'Expired'} key={index}>
+                                {status}
+                              </StatusIndicator>
+                            ))
+                          ) : (
+                            'No Payments'
+                          )}
+                        </td>
+                        <td>
+                          <Link to={`/pay/${member._id}`}>Renew</Link>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </section>
@@ -103,7 +111,7 @@ const Showpayments = () => {
   );
 }
 
-export default Showpayments;
+export default ShowPayments;
 
 const Section = styled.section`
   color: black;
@@ -161,53 +169,42 @@ const Section = styled.section`
   }
 
   tbody tr:nth-child(even) {
-    background-color: rgba(250, 250, 250, 0.5);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
   tbody tr:hover {
-    background-color: #e9ecef;
+    background-color: rgba(0, 0, 0, 0.1);
   }
+`;
 
-  tbody td {
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-  }
+const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
 
-  .table_body::-webkit-scrollbar-thumb {
+  input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
     border-radius: 0.5rem;
-    background-color: #0004;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+  }
+
+  input::placeholder {
+    color: #aaa;
   }
 `;
 
 const BackbuttonContainer = styled.div`
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 2rem;
+  left: 2rem;
 `;
 
-const SearchBar = styled.div`
-  input {
-    padding: 0.4rem;
-    border: 1px solid #ddd;
-    border-radius: 0.25rem;
-    outline: none;
-    width: 200px;
-    font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.6); /* Transparent background */
-    margin-left: 1rem;
-  }
-
-  input::placeholder {
-    color: gray;
-  }
-`;
-
-const StatusIndicator = styled.div`
-  padding: 0.5rem;
-  border-radius: 5px;
-  background-color: ${(props) => (props.expired ? '#e74c3c' : '#2ecc71')};
-  color: white;
-  text-align: center;
+const StatusIndicator = styled.span`
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  color: ${props => props.expired ? 'red' : 'green'};
 `;

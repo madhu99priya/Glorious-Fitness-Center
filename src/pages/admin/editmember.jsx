@@ -147,7 +147,7 @@ const Section = styled.section`
     align-items: center;
     width: 40vw;
     max-height: 85vh;
-    background-color: rgba(255, 255, 255, 0.5); /* More transparent */
+    background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 1rem;

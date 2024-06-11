@@ -3,8 +3,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import Backbutton from '../Backbutton.jsx';
+import Background from '../../assets/background-3.jpg';
 
 const stripePromise = loadStripe('pk_test_51PM9dJ2MpEBmq3acEmzbbN7VA8dBR88dvo6m5weguHB9cCWbqYLAdQj87Qxbibk304AuaBVb3pzjhksWObVhNCGy00kyACT6ft');
 
@@ -72,7 +73,7 @@ const PaymentForm = () => {
   };
 
   return (
-    < >
+    <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }} >
 
     <div>
     <BackbuttonContainer>
@@ -80,7 +81,7 @@ const PaymentForm = () => {
     </BackbuttonContainer>
     </div>
     
-    <FormContainer>
+    <FormContainer >
       <FormTitle>Member Payment Form</FormTitle>
       <form onSubmit={handleSubmit}>
         <FormField>
@@ -121,7 +122,7 @@ const PaymentForm = () => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </form>
     </FormContainer>
-    </>
+    </div>
   );
 };
 
@@ -134,10 +135,10 @@ const PaymentFormPage = () => (
 export default PaymentFormPage;
 
 const FormContainer = styled.div`
-  max-width: 500px;
-  margin: 2rem auto;
+  width: 30vw;
+  margin: 4rem auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   color: black;
@@ -147,6 +148,8 @@ const FormTitle = styled.h2`
   text-align: center;
   margin-bottom: 1rem;
   color: #333;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 const FormField = styled.div`
@@ -199,14 +202,14 @@ const SubmitButton = styled.button`
   padding: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
   font-size: 1.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #218838;
+    background-color: #0056b3;
   }
 
   &:disabled {

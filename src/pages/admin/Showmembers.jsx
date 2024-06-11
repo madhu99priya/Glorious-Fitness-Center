@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../../Components/Spinner.jsx';
@@ -161,7 +159,7 @@ const Section = styled.section`
     align-items: center;
     width: 60vw;
     max-height: 85vh;
-    background-color: rgba(255, 255, 255, 0.5); /* More transparent */
+    background-color: rgba(255, 255, 255, 0.7); /* More transparent */
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     border-radius: 1rem;
@@ -197,6 +195,7 @@ const Section = styled.section`
 
   table, th, td {
     padding: 1rem;
+    border: 1px solid #ddd;
   }
 
   thead th {
@@ -248,3 +247,4 @@ const SearchBar = styled.div`
     color: gray;
   }
 `;
+

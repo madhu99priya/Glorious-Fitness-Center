@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../../Components/Spinner.jsx';
 import { Link } from 'react-router-dom';
-import { MdOutlineAddBox } from 'react-icons/md';
+import { MdOutlinePayment } from "react-icons/md";
 import Background from '../../assets/background-2.jpg';
 import styled from 'styled-components';
 import Backbutton from '../../Components/Backbutton.jsx';
@@ -56,9 +56,6 @@ const ShowPayments = () => {
                       onChange={handleSearchChange}
                     />
                   </SearchBar>
-                  {/* <Link to='/admindashboard/addpayments'>
-                    <MdOutlineAddBox className='text-red-800 text-4xl' />
-                  </Link> */}
                 </div>
               </div>
             </section>
@@ -71,7 +68,7 @@ const ShowPayments = () => {
                     <th>Email</th>
                     <th>Id</th>
                     <th>Payment Status</th>
-                    <th>Actions</th>
+                    <th>Renew</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -97,7 +94,7 @@ const ShowPayments = () => {
                           )}
                         </td>
                         <td>
-                          <Link to={`/admindashboard/addpayments/${member._id}`}>Renew</Link>
+                          <Link to={`/admindashboard/addpayments/${member._id}`}><MdOutlinePayment className='payment-icon'/></Link>
                         </td>
                       </tr>
                     ))}
@@ -120,11 +117,11 @@ const Section = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60vw;
+    width: 80vw;
     max-height: 85vh;
-    background-color: rgba(255, 255, 255, 0.5); /* More transparent */
+    background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
     overflow: hidden;
     margin: 4rem auto;
@@ -139,7 +136,7 @@ const Section = styled.section`
   }
 
   .table_header h1 {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: bold;
     margin: 0;
   }
@@ -157,7 +154,8 @@ const Section = styled.section`
   }
 
   table, th, td {
-    padding: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
   }
 
   thead th {
@@ -165,7 +163,8 @@ const Section = styled.section`
     top: 0;
     background-color: #f8f9fa;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    font-size: 1rem;
   }
 
   tbody tr:nth-child(even) {
@@ -174,6 +173,15 @@ const Section = styled.section`
 
   tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .payment-icon {
+    color: red;
+    cursor: pointer;
+  }
+
+  .payment-icon:hover {
+    color: darkred;
   }
 `;
 

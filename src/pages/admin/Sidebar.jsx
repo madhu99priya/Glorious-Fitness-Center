@@ -6,7 +6,7 @@ import { FiLogOut, FiMessageSquare } from 'react-icons/fi';
 import { MdReviews, MdOutlineNoteAlt, MdManageAccounts } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom';
 import ScrollReveal from 'scrollreveal';
-import Logo from '../../assets/Logo2.png';
+import Logo from '../../assets/logo.png';
 import LogoutPopup from '../../Components/LogoutPopup.jsx';
 
 const Sidebar = () => {
@@ -59,8 +59,8 @@ const Sidebar = () => {
         <div className="top">
           <div className="brand">
             {/* logo should be added */}
-            {/* <span className='logo'><img src={Logo} /></span> */}
-            <span>Glorious</span>
+            <img src= {Logo} alt="" className='logo' />
+            {/* <span>Glorious</span> */}
           </div>
           <div className="toggle"></div>
           <div className="links">
@@ -142,7 +142,9 @@ export default Sidebar;
 const Section = styled.section`
   position: fixed;
   left: 0;
-  background-color: #212121;
+  background-color: black;
+  border-right: 2px solid #444; 
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); 
   height: 100vh;
   width: 18vw;
   display: flex;
@@ -170,6 +172,13 @@ const Section = styled.section`
         font-size: 2rem;
         color: light-red;
         font-family: 'Permanent Marker', cursive;
+      }
+
+      .logo {
+        width: 150px;
+        height: 150px;
+        margin-top : 1rem;
+        margin-bottom : 1rem;
       }
     }
 

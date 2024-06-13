@@ -48,10 +48,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar.jsx';
-import DashboardNavbar from './DashboardNavbar.jsx';
 import { FaUsers, FaDollarSign, FaChartLine, FaEnvelope } from 'react-icons/fa';
-import Background from '../../assets/Admindashboard_image.png'
-// import EarningsGraph from '../../assets/image.png'; // The uploaded graph image
+import Background from '../../assets/Admindashboard_image.png';
 
 const Dashboard = () => {
   return (
@@ -59,7 +57,6 @@ const Dashboard = () => {
       <Sidebar />
 
       <MainContent>
-        {/* <DashboardNavbar /> */}
         <Header>
           <h1>Admin Dashboard</h1>
           <h3>Welcome back, Admin!</h3>
@@ -101,6 +98,7 @@ const Div = styled.div`
   display: flex;
   position: relative;
   height: 100vh;
+  background: #000;
 `;
 
 const MainContent = styled.div`
@@ -109,20 +107,22 @@ const MainContent = styled.div`
   width: 100%;
   background: url(${Background}) no-repeat center center fixed;
   background-size: contain;
-  overflow-y: auto;
-  color: #fff;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 const Header = styled.header`
   text-align: center;
   margin-bottom: 2rem;
   h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #ff0000; 
   }
   h3 {
-    font-size: 1.2rem;
-    color: #888;
+    font-size: 1.5rem;
+    color: #ff6666; 
   }
 `;
 
@@ -133,15 +133,21 @@ const DashboardStats = styled.div`
 `;
 
 const Card = styled.div`
-  background: #1f1f1f;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: rgba(58, 58, 58, 0.7); /* Transparent dark background */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   text-align: center;
   width: 22%;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
   h2 {
     font-size: 1.2rem;
     margin: 1rem 0;
+    color: #fff;
   }
   p {
     font-size: 1.5rem;
@@ -160,22 +166,23 @@ const GraphSection = styled.div`
 `;
 
 const Graph = styled.div`
-  background: #1f1f1f;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background: rgba(42, 42, 42, 0.7); /* Transparent dark background */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   text-align: center;
   width: 60%;
   height: 18rem;
   .graph-image {
     width: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
   }
   h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: white;
   }
 `;
-
 export default Dashboard;
+
 

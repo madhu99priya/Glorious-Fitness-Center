@@ -15,6 +15,7 @@
     "axios": "^1.6.8",
     "components": "^0.1.0",
     "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.2.10",
     "jquery": "^3.7.1",
     "jquery-mask-plugin": "^1.14.16",

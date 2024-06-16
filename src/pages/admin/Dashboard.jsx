@@ -1,58 +1,16 @@
-// import React from 'react'
-// import styled from 'styled-components'
-// import Adminheader from '../../Components/Adminheader/Adminheader.jsx'
-// import Adminsidebar from '../../Components/Adminsidebar/Adminsidebar.jsx'
-// import '../../App.css'
-// import Sidebar from './Sidebar.jsx'
-// import DashboardNavbar from './DashboardNavbar.jsx'
-// import Background from '../../assets/Admindashboard_image.png'
-
-
-// const Dashboard = () => {
-//   return (
-//     // <div className="App">
-//     //   <Adminheader />
-//     //   <div className="main-content">
-//     //     <Adminsidebar />
-//     //   </div>
-//     // </div>
-
-//     < Div>
-        
-//         <img src={Background} alt="" className='hero-image' />
-//         < Sidebar />
-//         < DashboardNavbar />
-
-  
-
-//     </Div>
-//   )
-// }
-
-// const Div = styled.div`
-//   position: relative;
-
-//   .hero-image{
-//     position: absolute;
-//     display : flex;
-//     justify-content: center;
-//     right: 18%;
-//     margin-top: 1rem;
-//     width: 50rem;
-//   }
-
-// `;
-
-
-// export default Dashboard
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar.jsx';
 import { FaUsers, FaDollarSign, FaChartLine, FaEnvelope } from 'react-icons/fa';
 import Background from '../../assets/Admindashboard_image.png';
+import UnapprovedMembersContext from '../../Contexts/UnapprovedMembersContext.jsx';
+
 
 const Dashboard = () => {
+  const unapprovedMembersCount = useContext(UnapprovedMembersContext);
+
   return (
+
     <Div>
       <Sidebar />
 
@@ -75,7 +33,8 @@ const Dashboard = () => {
           <Card>
             <FaUsers size={30} />
             <h2>New Registrations</h2>
-            <p>321</p>
+            <p>{unapprovedMembersCount}</p>
+            
           </Card>
           <Card>
             <FaEnvelope size={30} />
@@ -83,12 +42,12 @@ const Dashboard = () => {
             <p>5</p>
           </Card>
         </DashboardStats>
-        <GraphSection>
+        {/* <GraphSection>
           <Graph>
-            <h2>This Month Earnings</h2>
+            <h2>This Month Earnings</h2> */}
             {/* <img src={Background} alt="Graph" className="graph-image" /> */}
-          </Graph>
-        </GraphSection>
+          {/* </Graph>
+        </GraphSection> */}
       </MainContent>
     </Div>
   );
@@ -133,7 +92,7 @@ const DashboardStats = styled.div`
 `;
 
 const Card = styled.div`
-  background: rgba(58, 58, 58, 0.7); /* Transparent dark background */
+  background: rgba(58, 58, 58, 0.7);
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -159,30 +118,6 @@ const Card = styled.div`
   }
 `;
 
-const GraphSection = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-`;
-
-const Graph = styled.div`
-  background: rgba(42, 42, 42, 0.7); /* Transparent dark background */
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  text-align: center;
-  width: 60%;
-  height: 18rem;
-  .graph-image {
-    width: 100%;
-    border-radius: 10px;
-  }
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: white;
-  }
-`;
 export default Dashboard;
 
 

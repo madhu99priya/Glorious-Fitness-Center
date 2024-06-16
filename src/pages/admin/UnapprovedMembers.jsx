@@ -41,7 +41,7 @@ const UnapprovedMembers = () => {
       .catch(error => {
         console.error(error);
         //alert('An error occurred. Check the console for details.');
-        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'success', autoHideDuration: 1000})
+        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error', autoHideDuration: 1000})
       });
   };
 

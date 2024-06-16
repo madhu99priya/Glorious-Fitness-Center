@@ -124,7 +124,7 @@ const Sidebar = () => {
         </div>
         <div className="logout">
           <button onClick={handleLogout} className="logout-button">
-            <FiLogOut />
+            <FiLogOut/>
             <span>Log Out</span>
           </button>
         </div>
@@ -216,23 +216,24 @@ const Section = styled.section`
     }
   }
 
-  .logout {
+  .logout-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: white;
+    gap: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
     padding: 0.6rem 1rem;
     border-radius: 0.6rem;
-    &:hover {
-      background-color: #da0037;
-    }
-    .logout-button {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      color: white;
-      gap: 1rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-  }
+    margin-left: -2.1rem;
+}
+
+.logout-button:hover {
+    background-color: #da0037;
+}
+
 
   @media screen and (min-width: 280px) and (max-width: 1080px) {
     position: initial;

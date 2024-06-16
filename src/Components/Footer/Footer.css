@@ -85,3 +85,15 @@
     border: 2px solid #ff3333; 
   }
  
+  .backdrop-blur3 {
+    position: absolute;
+    width: 22rem;
+    height: 16rem;
+    top: 164rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 45%;
+    background: #fd263b;
+    filter: blur(220px);
+    z-index: -1;
+}

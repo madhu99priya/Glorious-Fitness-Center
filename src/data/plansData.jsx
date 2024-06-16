@@ -6,7 +6,7 @@ export const plansData = [
     id: 1,
     icon: <FaRegStar size={25} />,
     name: "BASIC PLAN",
-    price: "2500",
+    price: "2,500",
     features: [
       "Duration - 1 month",
       "Free consultaion to coaches",
@@ -17,7 +17,7 @@ export const plansData = [
     id: 2,
     icon: <FaStar  size={25}/>,
     name: "PREMIUM PLAN",
-    price: "14000",
+    price: "14,000",
     features: [
       "Duration - 6 months",
       "Free consultaion of Coaches",
@@ -28,7 +28,7 @@ export const plansData = [
     id: 3,
     icon: < FaStarHalfAlt  size={25}/>,
     name: "PRO PLAN",
-    price: "29000",
+    price: "29,000",
     features: [
       "Duration - 1 year",
       "Consultation of Private Coach",

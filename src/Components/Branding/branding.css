@@ -132,9 +132,9 @@
     position: absolute;
     width: 22rem;
     height: 16rem;
-    top: 26rem;
+    top: 28rem;
     right: 62rem;
-    border-radius:50% ;
+    border-radius:45% ;
     background: #fd263b;
     filter: blur(170px);
     z-index: -3;

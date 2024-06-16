@@ -8,6 +8,7 @@ const Footer = () => {
     <>
       <hr class="footer-divider" />
       <div className="footer-container">
+      <div className="backdrop-blur3"></div>
         <div className="footer-col">
           <div className="footer-logo">
             <img src={logo} alt="Logo" />

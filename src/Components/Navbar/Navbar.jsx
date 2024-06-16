@@ -150,7 +150,7 @@ const Navbar = () => {
         duration={500}
         className={activeSection === 'programs' ? 'active' : ''}
       >
-        Services & Payments
+        Services & Plans
       </ScrollLink>
       <ScrollLink
         to='gallery'

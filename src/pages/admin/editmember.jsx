@@ -4,7 +4,7 @@ import Spinner from '../../Components/Spinner.jsx';
 import Backbutton from '../../Components/Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
 import Background from '../../assets/background-4.png';
-import styled from 'styled-components';
+import styled , {keyframes} from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
@@ -138,6 +138,20 @@ const BackbuttonContainer = styled.div`
   left: 1rem;
 `;
 
+const moveUpAndCenter = keyframes`
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 const Section = styled.section`
   color: black;
 
@@ -154,6 +168,7 @@ const Section = styled.section`
     overflow: hidden;
     margin: 2rem auto;
     padding: 2rem;
+    animation: ${moveUpAndCenter} 1s ease-out;
   }
 
   h1 {

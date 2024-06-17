@@ -14,6 +14,8 @@
     margin: 2rem;
     height: 30rem;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 0.5px solid #fff;
+  border-radius: 10px;
   }
   
   .images:hover {
@@ -28,11 +30,15 @@
     text-align: center; 
   }
   
-  .footer-socials {
+  .trainer-socials {
     display: flex;
     gap: 1rem;
     justify-content: center; 
     margin-top: 0.5rem;
+  }
+
+  .trainer-socials a:hover {
+    color: #ff3333;
   }
   
 

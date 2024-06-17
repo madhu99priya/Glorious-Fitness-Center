@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Spinner from '../../Components/Spinner.jsx';
 import Backbutton from '../../Components/Backbutton.jsx';
 import Background from '../../assets/background-1.jpg';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Showmember = () => {
   const [member, setMember] = useState({});
@@ -42,8 +42,8 @@ const Showmember = () => {
             <DetailItem label="Email" value={member.email} />
             <DetailItem label="Age" value={member.age} />
             <DetailItem label="Category" value={member.category} />
-            <DetailItem label="Joined Date" value={new Date(member.createdAt).toLocaleString()} />
-            <DetailItem label="Last Update Time" value={new Date(member.updatedAt).toLocaleString()} />
+            {/* <DetailItem label="Joined Date" value={new Date(member.createdAt).toLocaleString()} />
+            <DetailItem label="Last Update Time" value={new Date(member.updatedAt).toLocaleString()} /> */}
           </Card>
         )}
       </Content>
@@ -60,6 +60,17 @@ const DetailItem = ({ label, value }) => (
 
 export default Showmember;
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Container = styled.div`
   background: url(${Background}) no-repeat center center fixed;
   background-size: cover;
@@ -67,6 +78,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
 const BackbuttonContainer = styled.div`
@@ -80,31 +92,34 @@ const Content = styled.div`
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
-  padding: 1.2rem;
+  padding: 2rem;
   width: 90%;
   max-width: 600px;
   text-align: center;
+  animation: ${fadeIn} 0.5s ease-out;
 `;
 
 const Title = styled.h1`
-  font-size: 1.6rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
   color: #333;
   font-weight: bold;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
 const Divider = styled.hr`
   width: 100%;
   border: none;
   border-top: 1px solid #ddd;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   text-align: left;
+  animation: ${fadeIn} 1.5s ease-out;
 `;
 
 const Item = styled.div`
@@ -123,10 +138,9 @@ const Label = styled.span`
 
 const Value = styled.span`
   font-size: 1.25rem;
-  color: #007BFF;  /* Add a primary color for the values */
+  color: #007BFF;
   font-weight: 700;
   text-align: right;
   max-width: 60%;
   word-break: break-word;
 `;
-

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Spinner from '../Spinner.jsx'
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import Backbutton from '../Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import Background from '../../assets/background-1.jpg'
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -39,7 +40,7 @@ const RegistrationForm = () => {
 
   return (
 
-    <div >
+    <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
       <BackbuttonContainer>
         <Backbutton destination = {'/'}/>
       </BackbuttonContainer>
@@ -119,6 +120,20 @@ const BackbuttonContainer = styled.div`
   left: 1rem;
 `;
 
+const moveUpAndCenter = keyframes`
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 const Section = styled.section`
   color: black;
 
@@ -135,6 +150,7 @@ const Section = styled.section`
     overflow: hidden;
     margin: 5.3rem auto;
     padding: 2rem;
+    animation: ${moveUpAndCenter} 1s ease-out;
   }
 
   h1 {

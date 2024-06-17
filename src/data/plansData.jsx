@@ -28,7 +28,7 @@ export const plansData = [
     id: 3,
     icon: < FaStarHalfAlt  size={25}/>,
     name: "PRO PLAN",
-    price: "29,000",
+    price: "27,000",
     features: [
       "Duration - 1 year",
       "Consultation of Private Coach",

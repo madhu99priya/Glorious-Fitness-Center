@@ -144,6 +144,7 @@ const Navbar = () => {
       >
         Home
       </ScrollLink>
+
       <ScrollLink
         to='programs'
         smooth={true}
@@ -152,6 +153,16 @@ const Navbar = () => {
       >
         Services & Plans
       </ScrollLink>
+
+      <ScrollLink
+        to='trainers'
+        smooth={true}
+        duration={500}
+        className={activeSection === 'trainers' ? 'active' : ''}
+      >
+        Our Trainers
+      </ScrollLink>
+
       <ScrollLink
         to='gallery'
         smooth={true}
@@ -160,14 +171,9 @@ const Navbar = () => {
       >
         Gallery
       </ScrollLink>
-      <ScrollLink
-        to='about'
-        smooth={true}
-        duration={500}
-        className={activeSection === 'about' ? 'active' : ''}
-      >
-        About Us
-      </ScrollLink>
+
+
+
       <MdAdminPanelSettings 
         onClick={toggleAdminLog} 
         size={33} 

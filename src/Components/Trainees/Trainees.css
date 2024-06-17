@@ -1,0 +1,50 @@
+.traineres-container {
+    margin-top: 8rem;
+  }
+  
+  .img-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+    gap: 0rem;
+  }
+  
+  .images {
+    width: 25rem;
+    margin: 2rem;
+    height: 30rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .images:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  }
+  
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    justify-content: center; 
+    margin-top: 0.5rem;
+  }
+  
+
+  .blureffect {
+    position: absolute;
+    width: 22rem;
+    height: 16rem;
+    top: 140rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 45%;
+    background: #fd263b;
+    filter: blur(220px);
+    z-index: -1;
+}

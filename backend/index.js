@@ -4,6 +4,7 @@ import mongoose  from 'mongoose'
 import memberRoute from './routes/memberRoute.js'
 import tempmemberRoute from './routes/tempmemberRoute.js'
 import PaymentRoute from './routes/PayementRoute.js'
+import noticeRoute from './routes/noticeRoute.js'
 import cors from 'cors'
 
 
@@ -42,6 +43,9 @@ app.use('/unapproved',tempmemberRoute);
 app.use('/approve',tempmemberRoute);
 app.use('/unapprove', tempmemberRoute);
 app.use('/payments',PaymentRoute)
+
+//middlewares for notices
+app.use('/notices', noticeRoute);
 
 
 mongoose.connect(mongoDBURL)

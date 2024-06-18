@@ -10,6 +10,7 @@ import UnapprovedMembers from './pages/admin/UnapprovedMembers.jsx'
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm.jsx';
 import PaymentForm from './Components/PaymentForm/PaymentForm.jsx';
 import Showpayments from './pages/admin/Showpayments.jsx'
+import AdminNotices  from './Components/AdminNotices.jsx';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
        < Route path = 'registrationform' element = { < RegistrationForm/>} />
        < Route path = 'admindashboard/payments' element = { <Showpayments />} />
        < Route path = 'admindashboard/addpayments/:memberId' element = { <PaymentForm />} />
+       < Route path = 'admindashboard/notices' element = { < AdminNotices/>} />
        < Route path = 'admindashboard/payment-confirmation' />
        {/* relative links */}
     

@@ -114,10 +114,10 @@ const Sidebar = () => {
                 className={currentLink === 6 ? 'active' : 'none'}
                 onClick={() => setCurrentLink(6)}
               >
-                <a href="#">
+                <Link to= "/admindashboard/notices">
                   <MdOutlineNoteAlt />
                   <span> Notices</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

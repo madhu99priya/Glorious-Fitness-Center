@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { FaCheckCircle } from 'react-icons/fa';
 import Backbutton from '../Backbutton.jsx';
 import Background from '../../assets/background-3.jpg';
 
@@ -24,6 +25,7 @@ const PaymentForm = () => {
   const [amount, setAmount] = useState(plans['1 month']);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     setAmount(plans[plan]);
@@ -61,67 +63,61 @@ const PaymentForm = () => {
       });
 
       console.log(response.data);
-      // Handle success or error accordingly
-
+      setSuccess(true); // Set success state to true on successful payment
     } catch (error) {
       console.error(error);
       setError(error.response ? error.response.data : error.message);
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
-    <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }} >
-
-    <div>
-    <BackbuttonContainer>
+    <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
+      <BackbuttonContainer>
         <Backbutton destination='/admindashboard/payments' />
-    </BackbuttonContainer>
-    </div>
-    
-    <FormContainer >
-      <FormTitle>Member Payment Form</FormTitle>
-      <form onSubmit={handleSubmit}>
-        <FormField>
-          <Label htmlFor="memberId">Member ID</Label>
-          <Input
-            type="text"
-            id="memberId"
-            value={memberId}
-            onChange={(e) => setMemberId(e.target.value)}
-            required
-          />
-        </FormField>
-        <FormField>
-          <Label htmlFor="plan">Plan</Label>
-          <Select
-            id="plan"
-            value={plan}
-            onChange={(e) => setPlan(e.target.value)}
-          >
-            <option value="1 month">1 month - Rs. 2500</option>
-            <option value="6 months">6 months - Rs. 14000</option>
-            <option value="1 year">1 year - Rs. 29000</option>
-          </Select>
-        </FormField>
-        <FormField>
-          <Label>Amount</Label>
-          <AmountDisplay>Rs. {amount}</AmountDisplay>
-        </FormField>
-        <FormField>
-          <Label>Card Details</Label>
-          <CardElementContainer>
-            <CardElement options={cardStyle} />
-          </CardElementContainer>
-        </FormField>
-        <SubmitButton type="submit" disabled={!stripe || loading}>
-          {loading ? 'Processing...' : 'Pay'}
-        </SubmitButton>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </form>
-    </FormContainer>
+      </BackbuttonContainer>
+      <FormContainer>
+        <FormTitle>Member Payment Form</FormTitle>
+        <form onSubmit={handleSubmit}>
+          <FormField>
+            <Label htmlFor="memberId">Member ID</Label>
+            <Input
+              type="text"
+              id="memberId"
+              value={memberId}
+              onChange={(e) => setMemberId(e.target.value)}
+              required
+            />
+          </FormField>
+          <FormField>
+            <Label htmlFor="plan">Plan</Label>
+            <Select
+              id="plan"
+              value={plan}
+              onChange={(e) => setPlan(e.target.value)}
+            >
+              <option value="1 month">1 month - Rs. 2500</option>
+              <option value="6 months">6 months - Rs. 14000</option>
+              <option value="1 year">1 year - Rs. 29000</option>
+            </Select>
+          </FormField>
+          <FormField>
+            <Label>Amount</Label>
+            <AmountDisplay>Rs. {amount}</AmountDisplay>
+          </FormField>
+          <FormField>
+            <Label>Card Details</Label>
+            <CardElementContainer>
+              <CardElement options={cardStyle} />
+            </CardElementContainer>
+          </FormField>
+          <SubmitButton type="submit" disabled={!stripe || loading || success}>
+            {loading ? 'Processing...' : success ? <CheckmarkIcon /> : 'Pay'}
+          </SubmitButton>
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </form>
+      </FormContainer>
     </div>
   );
 };
@@ -133,6 +129,21 @@ const PaymentFormPage = () => (
 );
 
 export default PaymentFormPage;
+
+const checkmarkAnimation = keyframes`
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const CheckmarkIcon = styled(FaCheckCircle)`
+  animation: ${checkmarkAnimation} 0.5s ease-in-out;
+  color: white;
+  font-size: 2rem; // Increased size for better visual impact
+`;
 
 const FormContainer = styled.div`
   width: 30vw;
@@ -207,6 +218,9 @@ const SubmitButton = styled.button`
   font-size: 1.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background-color: #0056b3;

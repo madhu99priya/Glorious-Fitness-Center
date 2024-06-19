@@ -30,7 +30,7 @@ const Plans = () => {
                 </div>
               ))}
             </div>
-            <Link to='/paymentForm' className='button'>Join Now</Link>
+            <Link to='/registrationform' className='button'>Join Now</Link>
           </div>
         ))}
       </div>

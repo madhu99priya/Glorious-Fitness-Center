@@ -36,12 +36,12 @@ const UnapprovedMembers = () => {
       .then(() => {
         setMembers(members.filter(member => member._id !== id));
         //alert('Member approved');
-        enqueueSnackbar('Member approved', {variant: 'success', autoHideDuration : 1000})
+        enqueueSnackbar('Member approved. Approval mail sent successfully', {variant: 'success', autoHideDuration : 2000})
       })
       .catch(error => {
         console.error(error);
         //alert('An error occurred. Check the console for details.');
-        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error', autoHideDuration: 1000})
+        enqueueSnackbar('An error occurred. Check the console for details.', {variant : 'error', autoHideDuration: 1500})
       });
   };
 

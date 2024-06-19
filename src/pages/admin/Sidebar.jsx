@@ -101,7 +101,7 @@ const Sidebar = () => {
                   <span> Registrations</span>
                 </Link>
               </li>
-              <li
+              {/* <li
                 className={currentLink === 5 ? 'active' : 'none'}
                 onClick={() => setCurrentLink(5)}
               >
@@ -109,7 +109,7 @@ const Sidebar = () => {
                   <FiMessageSquare />
                   <span> Messages</span>
                 </a>
-              </li>
+              </li> */}
               <li
                 className={currentLink === 6 ? 'active' : 'none'}
                 onClick={() => setCurrentLink(6)}

@@ -5,6 +5,7 @@ import Plans from '../Components/Plans/Plans'
 import Footer from '../Components/Footer/Footer'
 import ImageGallery from '../Components/Gallery/Gallery.jsx'
 import Trainees from '../Components/Trainees/Trainees.jsx'
+import MarqueeNotice from '../Components/MarqueeNotice.jsx'
 
 
 const Home = () => {
@@ -30,6 +31,7 @@ const Home = () => {
 {/* followings should be changed- not proper way */}
       <section id='gallery'> 
       <ImageGallery />
+       <MarqueeNotice />
       <Footer />
       </section>
 

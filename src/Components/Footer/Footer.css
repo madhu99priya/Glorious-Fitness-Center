@@ -1,9 +1,9 @@
 .footer-divider {
     border: 0;
-    border-top: 2px solid white; 
+    border-top: 3px solid white; 
     margin: 0;
     width: 100%;
-    margin-top: 8rem;
+    /* margin-top: 4rem; */
   }
 
 .footer-container {
@@ -11,7 +11,7 @@
     justify-content: space-between;
     padding: 2rem 2rem;
     color: #fff;
-    margin-top: 1rem;
+    margin-top: 0;
   }
   
   

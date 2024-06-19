@@ -23,23 +23,14 @@ const MarqueeNotice = () => {
     setLoading(false);
   };
 
+  const concatenatedNotices = notices.map(notice => `<strong>${notice.title}:</strong> ${notice.content}`).join(' | ');
+
   return (
     <MarqueeContainer>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <MarqueeContent>
-          {notices.length > 0 ? (
-            notices.map((notice) => (
-              <Notice key={notice._id}>
-                <strong>{notice.title}: </strong>
-                <span>{notice.content}</span>
-              </Notice>
-            ))
-          ) : (
-            <p>No notices found</p>
-          )}
-        </MarqueeContent>
+        <MarqueeContent dangerouslySetInnerHTML={{ __html: notices.length > 0 ? concatenatedNotices : 'No notices found' }} />
       )}
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </MarqueeContainer>
@@ -52,11 +43,16 @@ const MarqueeContainer = styled.div`
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  background-color: rgba(255, 255,255, 0.5); 
+  padding: 10px; 
+  margin-top : 35px;
+  marging-bottom : 0; 
 `;
 
 const MarqueeContent = styled.div`
   display: inline-block;
   animation: marquee 15s linear infinite;
+  color: black;
 
   @keyframes marquee {
     0% {
@@ -66,11 +62,6 @@ const MarqueeContent = styled.div`
       transform: translateX(-100%);
     }
   }
-`;
-
-const Notice = styled.div`
-  margin-right: 1rem;
-  padding: 0.5rem;
 `;
 
 const ErrorMessage = styled.div`

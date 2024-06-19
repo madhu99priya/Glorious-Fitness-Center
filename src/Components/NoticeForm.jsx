@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 
 const NoticeForm = ({ selectedNotice, clearSelection, fetchNotices }) => {
   const [title, setTitle] = useState('');
@@ -82,13 +82,28 @@ const NoticeForm = ({ selectedNotice, clearSelection, fetchNotices }) => {
 
 export default NoticeForm;
 
+const moveUpAndCenter = keyframes`
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
 const FormContainer = styled.div`
-  background-color: #f8f9fa;
+  background-color: #e0ffff;
   padding: 2rem;
   border: 1px solid #dee2e6;
   border-radius: 10px;
   margin-top: 2rem;
   color: black;
+  animation: ${moveUpAndCenter} 1s ease-out;
 `;
 
 const Title = styled.h2`
@@ -96,6 +111,7 @@ const Title = styled.h2`
   color: #333;
   text-align: center;
   font-size: 1.75rem;
+  font-weight : bold;
 `;
 
 const FormField = styled.div`

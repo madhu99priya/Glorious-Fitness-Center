@@ -6,6 +6,7 @@ import { MdOutlinePayment } from "react-icons/md";
 import Background from '../../assets/background-2.jpg';
 import styled from 'styled-components';
 import Backbutton from '../../Components/Backbutton.jsx';
+import BreadcrumbNav from '../../Components/BreadcrumbNav/BreadcrumbNav.jsx';
 
 const ShowPayments = () => {
   const [members, setMembers] = useState([]);
@@ -33,9 +34,10 @@ const ShowPayments = () => {
 
   return (
     <div className='bg-cover bg-center h-screen' style={{ backgroundImage: `url(${Background})` }}>
-      <BackbuttonContainer>
+      {/* <BackbuttonContainer>
         <Backbutton destination='/admindashboard' />
-      </BackbuttonContainer>
+      </BackbuttonContainer> */}
+      < BreadcrumbNav />
       <div className='flex justify-between items-center p-4'>
       </div>
 
@@ -94,7 +96,7 @@ const ShowPayments = () => {
                           )}
                         </td>
                         <td>
-                          <Link to={`/admindashboard/addpayments/${member._id}`}><MdOutlinePayment className='payment-icon'/></Link>
+                          <Link to={`/admindashboard/payments/addpayments/${member._id}`}><MdOutlinePayment className='payment-icon'/></Link>
                         </td>
                       </tr>
                     ))}

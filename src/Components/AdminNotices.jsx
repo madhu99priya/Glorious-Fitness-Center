@@ -4,6 +4,7 @@ import NoticeForm from './NoticeForm';
 import NoticeList from './NoticeList';
 import Backbutton from '../Components/Backbutton.jsx'
 import Background from '../assets/background-4.png'
+import BreadcrumbNav from './BreadcrumbNav/BreadcrumbNav.jsx';
 
 const AdminNotices = () => {
   const [selectedNotice, setSelectedNotice] = useState(null);
@@ -18,9 +19,11 @@ const AdminNotices = () => {
 
   return (
     <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
-    <BackbuttonContainer>
+    {/* <BackbuttonContainer>
         <Backbutton destination='/admindashboard'/>
-      </BackbuttonContainer>
+      </BackbuttonContainer> */}
+      < BreadcrumbNav />
+      
     <AdminNoticesContainer>
       <NoticeFormContainer>
         <NoticeForm 

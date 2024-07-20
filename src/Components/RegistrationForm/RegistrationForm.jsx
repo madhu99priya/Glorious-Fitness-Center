@@ -6,6 +6,7 @@ import Backbutton from '../Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import Background from '../../assets/background-1.jpg'
+import BreadcrumbNav from '../BreadcrumbNav/BreadcrumbNav.jsx';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -41,9 +42,10 @@ const RegistrationForm = () => {
   return (
 
     <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
-      <BackbuttonContainer>
+      {/* <BackbuttonContainer>
         <Backbutton destination = {'/'}/>
-      </BackbuttonContainer>
+      </BackbuttonContainer> */}
+      < BreadcrumbNav showHomeLink={true}/>
       <Section>
         <div className='form-container'>
           <h1>Register for a Program</h1>

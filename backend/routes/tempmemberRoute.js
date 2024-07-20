@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
             from: process.env.EMAIL_USER,
             to: tempMember.email,
             subject: 'Registration Approved',
-            text: `Hello ${tempMember.name},\n\nYour registration has been approved.\n\nBest regards,\nFitness Center Team`
+            text: `Hello ${tempMember.name},\n\nYour registration has been approved.\n\nBest regards,\nGlorious Fitness Center Team`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Spinner from '../../Components/Spinner.jsx';
-import Backbutton from '../../Components/Backbutton.jsx';
 import Background from '../../assets/background-1.jpg';
 import styled, { keyframes } from 'styled-components';
+import BreadcrumbNav from '../../Components/BreadcrumbNav/BreadcrumbNav.jsx';
 
 const Showmember = () => {
   const [member, setMember] = useState({});
@@ -27,9 +27,7 @@ const Showmember = () => {
 
   return (
     <Container>
-      <BackbuttonContainer>
-        <Backbutton />
-      </BackbuttonContainer>
+      <BreadcrumbNav />
       <Content>
         <Title>Member Details</Title>
         <Divider />
@@ -42,8 +40,6 @@ const Showmember = () => {
             <DetailItem label="Email" value={member.email} />
             <DetailItem label="Age" value={member.age} />
             <DetailItem label="Category" value={member.category} />
-            {/* <DetailItem label="Joined Date" value={new Date(member.createdAt).toLocaleString()} />
-            <DetailItem label="Last Update Time" value={new Date(member.updatedAt).toLocaleString()} /> */}
           </Card>
         )}
       </Content>
@@ -72,19 +68,14 @@ const fadeIn = keyframes`
 `;
 
 const Container = styled.div`
+  position: relative; /* Position context for child elements */
   background: url(${Background}) no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-`;
-
-const BackbuttonContainer = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
 `;
 
 const Content = styled.div`

@@ -4,9 +4,10 @@ import Spinner from '../../Components/Spinner.jsx';
 import Backbutton from '../../Components/Backbutton.jsx';
 import { useNavigate } from 'react-router-dom';
 import Background from '../../assets/background-4.png';
-import styled , {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import BreadcrumbNav from '../../Components/BreadcrumbNav/BreadcrumbNav.jsx';
 
 const Editmember = () => {
   const [name, setName] = useState('');
@@ -16,7 +17,7 @@ const Editmember = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
-  const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     setLoading(true);
@@ -30,8 +31,7 @@ const Editmember = () => {
       })
       .catch((err) => {
         setLoading(false);
-        //alert('An error happened. Check the console');
-        enqueueSnackbar('An error happened. Check the console' , {variant : 'error'})
+        enqueueSnackbar('An error happened. Check the console', { variant: 'error' });
         console.log(err);
       });
   }, [id]);
@@ -41,30 +41,26 @@ const Editmember = () => {
       name,
       email,
       age,
-      category
+      category,
     };
     setLoading(true);
 
-    axios
-      .put(`http://localhost:9000/members/${id}`, data)
+    axios.put(`http://localhost:9000/members/${id}`, data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('Memeber details are edited successfully', {variant: 'success'})
+        enqueueSnackbar('Member details are edited successfully', { variant: 'success' });
         navigate('/admindashboard/members');
       })
       .catch((err) => {
         setLoading(false);
-      // alert('An error happened. Check the console');
-        enqueueSnackbar('An error happened. Check the console' , {variant : 'error'})
+        enqueueSnackbar('An error happened. Check the console', { variant: 'error' });
         console.log(err);
       });
   };
 
   return (
-    <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
-      <BackbuttonContainer>
-        <Backbutton />
-      </BackbuttonContainer>
+    <EditMemberContainer>
+      <BreadcrumbNav />
       <Section>
         <div className='form-container'>
           <h1>Edit Member Details</h1>
@@ -126,16 +122,22 @@ const Editmember = () => {
           </form>
         </div>
       </Section>
-    </div>
+    </EditMemberContainer>
   );
 };
 
 export default Editmember;
 
-const BackbuttonContainer = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+const EditMemberContainer = styled.div`
+  position: relative; /* Ensure that children can use absolute positioning */
+  background-image: url(${Background});
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const moveUpAndCenter = keyframes`
@@ -227,4 +229,3 @@ const Section = styled.section`
     background-color: #0056b3;
   }
 `;
-

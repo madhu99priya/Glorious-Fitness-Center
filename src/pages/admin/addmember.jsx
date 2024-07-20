@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Background from '../../assets/background-3.jpg';
 import styled, {keyframes} from 'styled-components';
 import { useSnackbar } from 'notistack';
+import BreadcrumbNav from '../../Components/BreadcrumbNav/BreadcrumbNav.jsx';
 
 const Addmember = () => {
   const [name, setName] = useState('');
@@ -42,9 +43,11 @@ const Addmember = () => {
 
   return (
     <div className='bg-cover bg-center h-screen flex flex-col items-center justify-center' style={{ backgroundImage: `url(${Background})` }}>
-      <BackbuttonContainer>
+      {/* <BackbuttonContainer>
         <Backbutton />
-      </BackbuttonContainer>
+      </BackbuttonContainer> */}
+
+      < BreadcrumbNav />
       <Section>
         <div className='form-container'>
           <h1>Add a New Member</h1>

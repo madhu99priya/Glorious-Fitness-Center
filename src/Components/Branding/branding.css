@@ -131,9 +131,9 @@
 
 .backdrop-blur{
     position: absolute;
-    width: 22rem;
-    height: 16rem;
-    top: 28rem;
+    width: 21rem;
+    height: 14rem;
+    top: 33rem;
     right: 62rem;
     border-radius:45% ;
     background: #fd263b;

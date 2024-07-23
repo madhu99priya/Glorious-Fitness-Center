@@ -42,7 +42,7 @@ import { Member } from '../models/membermodel.js';
 const router = express.Router();
 const stripe = new Stripe('sk_test_51PM9dJ2MpEBmq3acidYub1EivmYfEk34Ai9GEd1IAevgKuAZODNxfCFDty8tXquttvMTW4W1IchYoXs2A22mWWCg00tfwUDeZO');
 
-// Create Payment
+
 router.post('/', async (req, res) => {
   const { memberId, plan, paymentMethodId } = req.body;
   let amount;
@@ -63,7 +63,6 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Check if member exists
     const member = await Member.findById(memberId);
     if (!member) {
       return res.status(404).send('Member not found');

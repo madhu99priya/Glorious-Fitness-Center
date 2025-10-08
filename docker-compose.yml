@@ -1,0 +1,31 @@
+# === docker-compose.yml ===
+# Full working setup for MERN monorepo with Vite frontend + backend + proxy support
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        HTTP_PROXY: http://10.50.225.222:3128
+        HTTPS_PROXY: http://10.50.225.222:3128
+    container_name: glorious-backend
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./backend/.env   # backend secrets (PORT, MONGO_URI, EMAIL_USER, etc.)
+    restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        HTTP_PROXY: http://10.50.225.222:3128
+        HTTPS_PROXY: http://10.50.225.222:3128
+    container_name: glorious-frontend
+    ports:
+      - "5173:80"   # maps container Nginx port 80 to host 5173
+    depends_on:
+      - backend
+    restart: always

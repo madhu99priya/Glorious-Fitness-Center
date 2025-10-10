@@ -9,7 +9,7 @@ export const UnapprovedMembersProvider = ({ children }) => {
   useEffect(() => {
     const fetchUnapprovedMembers = async () => {
       try {
-        const response = await axios.get('http://localhost:9000/unapproved/count');
+        const response = await axios.get('http://backend:9000/unapproved/count');
         setNewRegistrationsCount(response.data.count);
       } catch (error) {
         console.error('Error fetching unapproved members count:', error);

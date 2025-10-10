@@ -23,9 +23,9 @@ const NoticeForm = ({ selectedNotice, clearSelection, fetchNotices }) => {
 
     try {
       if (selectedNotice) {
-        await axios.patch(`http://localhost:9000/notices/${selectedNotice._id}`, { title, content });
+        await axios.patch(`http://backend:9000/notices/${selectedNotice._id}`, { title, content });
       } else {
-        await axios.post('http://localhost:9000/notices', { title, content });
+        await axios.post('http://backend:9000/notices', { title, content });
       }
       clearForm();
       fetchNotices();

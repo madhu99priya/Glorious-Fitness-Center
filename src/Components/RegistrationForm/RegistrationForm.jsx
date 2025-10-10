@@ -22,7 +22,7 @@ const RegistrationForm = () => {
     setLoading(true);
 
 
-    axios.post('http://localhost:9000/register', data)
+    axios.post('http://backend:9000/register', data)
       .then(response => {
         setLoading(false);
         console.log(response.data);

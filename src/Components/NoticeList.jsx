@@ -15,7 +15,7 @@ const NoticeList = ({ editNotice }) => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get('http://localhost:9000/notices');
+      const response = await axios.get('http://backend:9000/notices'); // initially we tested with localhost:9000/ finally we want to test with backend:9000/ where backend is the name given for the backend
       setNotices(response.data);
     } catch (error) {
       setError('Error fetching notices');
@@ -32,7 +32,7 @@ const NoticeList = ({ editNotice }) => {
     setLoading(true);
     setError('');
     try {
-      await axios.delete(`http://localhost:9000/notices/${id}`);
+      await axios.delete(`http://backend:9000/notices/${id}`);
       fetchNotices();
     } catch (error) {
       setError('Error deleting notice');

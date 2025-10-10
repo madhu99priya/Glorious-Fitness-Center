@@ -14,7 +14,7 @@ const MarqueeNotice = () => {
   const fetchNotices = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:9000/notices');
+      const response = await axios.get('http://backend:9000/notices');
       setNotices(response.data);
     } catch (error) {
       setError('Error fetching notices');

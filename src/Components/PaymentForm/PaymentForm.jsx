@@ -57,7 +57,7 @@ const PaymentForm = () => {
       }
 
       // Send paymentMethodId to the backend
-      const response = await axios.post('http://localhost:9000/payments', {
+      const response = await axios.post('http://backend:9000/payments', {
         memberId,
         plan,
         paymentMethodId: paymentMethod.id,
